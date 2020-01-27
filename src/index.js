@@ -3,10 +3,12 @@ const app       = express();
 const morgan    = require('morgan');
 const mongoose  = require('mongoose');
 const cors      = require('cors');
+const userRoutes   = require('./routers/userRoutes');
 
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
+app.use(userRoutes);
 
 app.get('/', (req,res)=>{
     res.json({message: 'Wellcome to my app'});

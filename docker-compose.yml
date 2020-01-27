@@ -5,7 +5,7 @@ services:
         env_file: 
             - ./.env
         volumes: 
-            - ./:/opt/app
+            - ./:/opt/app/src
         ports:
             - '${PORT}:${PORT}'
         restart: unless-stopped
