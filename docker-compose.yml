@@ -1,12 +1,22 @@
 version: '3.1'
 services:
-    money-management-app:
+    money-management-app-server:
         build: .
         env_file: 
             - ./.env
         volumes: 
-            - ./:/opt/app/src
+            - ./src:/opt/app/src
         ports:
             - '${PORT}:${PORT}'
         restart: unless-stopped
-        command: nodemon index.js
+        command: yarn start
+    money-management-app-client:
+        build: ./src/client
+        volumes: 
+            - ./src/client:/opt/app/src/client
+        ports:
+            - '3000:3000'
+        links: 
+            - money-management-app-server
+        command: ls -la
+        command: yarn start
