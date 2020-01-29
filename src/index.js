@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 app.use(userRoutes);
-
+app.use('/api/users', userRoutes);
 app.get('/', (req,res)=>{
     res.json({message: 'Wellcome to my app'});
 });
