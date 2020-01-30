@@ -1,14 +1,16 @@
-const express   = require('express');
-const app       = express();
-const morgan    = require('morgan');
-const mongoose  = require('mongoose');
-const cors      = require('cors');
-const userRoutes   = require('./routers/userRoutes');
+const express       = require('express');
+const app           = express();
+const morgan        = require('morgan');
+const mongoose      = require('mongoose');
+const cors          = require('cors');
+const userRoutes    = require('./routers/userRoutes');
+const errorHandler  = require('./middlewares/errors');
 
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 app.use(userRoutes);
+app.use(errorHandler);
 
 app.use('/api/users', userRoutes);
 
