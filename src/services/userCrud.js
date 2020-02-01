@@ -1,9 +1,10 @@
 const User      = require('../models/User');
 const _p        = require('../helpers/simpleAsync');
 
+// create user
 module.exports.createUser = async (userData) => {
     return new Promise(async (resolve, reject)=> {
-        const [err, user] = await _p(User.find({email: userData.email}));
+        const [err, user] = await _p(User.findOne({email: userData.email}));
         if(!err && user.email){
             return resolve('User already exist');
         }
@@ -13,6 +14,19 @@ module.exports.createUser = async (userData) => {
         }
         if(saveUser){
             return resolve(saveUser);
+        }
+    })
+}
+
+// login user
+module.exports.login = async (reqData) => {
+    return new Promise(async (resolve, reject) => {
+        const [err, user] = await _p(User.findOne({email: reqData.email}));
+        if(err){
+            return reject(err.message);
+        }
+        if(user){
+            return resolve(user);
         }
     })
 }
