@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import Input from '../components/Input'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import Input from '../components/Input';
+import {connect} from 'react-redux';
+import {register} from '../store/actions/authActions'
 
-export default class Register extends Component {
+class Register extends Component {
   state = {
     name: '',
     email: '',
@@ -19,6 +21,8 @@ export default class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    let {user, error} = this.state;
+    this.props.register(user);
     
   }
 
@@ -49,3 +53,4 @@ export default class Register extends Component {
   }
 }
 
+export default connect(null, {register})(Register)
